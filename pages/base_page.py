@@ -56,6 +56,13 @@ class BasePage:
         element = self.find_element_on_page(locator)
         return element.is_displayed()
 
+    @allure.step('Проверка отображения элементов')
+    def are_elements_displayed(self, list_of_locators):
+        for locator in list_of_locators:
+            if not self.is_element_displayed(locator):
+                return False
+        return True
+
     @allure.step('Ожидание исчезновения элемента {locator}')
     def wait_until_element_disappears(self, locator, timeout=10):
         WebDriverWait(self.driver, timeout).until(ec.invisibility_of_element_located(locator))
@@ -64,7 +71,7 @@ class BasePage:
     def wait_for_element_visible(self, locator, timeout=10):
         WebDriverWait(self.driver, timeout).until(ec.visibility_of_element_located(locator))
 
-    @allure.step('Перетягивание элемента {locator}')
+    @allure.step('Перетягивание элемента {element}')
     def drag_and_drop_element(self, element, target):
         action = ActionChains(self.driver)
         element_locator = self.find_element_on_page(element)

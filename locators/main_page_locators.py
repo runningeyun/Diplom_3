@@ -21,7 +21,7 @@ class MainPageLocators:
 
     FIRST_BUN_COUNTER = (
         By.XPATH,
-        '//p[text()= "Флюоресцентная булка R2-D3"]/..//p[contains(@class, "counter_counter__num")]'
+        '//p[text()="Флюоресцентная булка R2-D3"]/..//p[contains(@class, "counter_counter__num")]'
         )
 
     CONSTRUCTOR_AREA = (By.XPATH, '//section[contains(@class, "BurgerConstructor")]//ul')

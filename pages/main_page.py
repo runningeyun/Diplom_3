@@ -22,11 +22,7 @@ class MainPage(BasePage):
     @allure.step('Проверяем, что всплывающее окно с деталями появилось')
     def is_ingredient_details_popup_show(self):
         self.wait_for_element_visible(MainPageLocators.INGREDIENT_DETAILS_HEADER)
-        for element in MainPageLocators.INGREDIENT_DETAILS:
-            if self.is_element_displayed(element):
-                return True
-
-            return False
+        return self.are_elements_displayed(MainPageLocators.INGREDIENT_DETAILS)
 
     @allure.step('Нажатие на кнопку, закрывающую окно с деталями ингредиента')
     def click_close_popup_details(self):
@@ -44,10 +40,7 @@ class MainPage(BasePage):
     @allure.step('Проверка увеличения счетчика при добавлении ингредиента')
     def is_ingredient_counter_increases(self, old_value, new_value):
         self.wait_for_element_visible(MainPageLocators.FIRST_BUN_COUNTER)
-        if new_value == old_value + new_value:
-            return True
-        else:
-            return False
+        return new_value == old_value + 2
 
     @allure.step('Проверка закрытия окна с деталями ингредиентов')
     def is_ingredients_details_popup_closes(self):
