@@ -38,9 +38,16 @@ class MainPage(BasePage):
         self.drag_and_drop_element(MainPageLocators.FIRST_BUN, MainPageLocators.CONSTRUCTOR_AREA)
 
     @allure.step('Проверка увеличения счетчика при добавлении ингредиента')
-    def is_ingredient_counter_increases(self, old_value, new_value):
+    def is_ingredient_counter_increases(self, old_value, new_value, is_bun=True):
         self.wait_for_element_visible(MainPageLocators.FIRST_BUN_COUNTER)
-        return new_value == old_value + 2
+
+        # Определение какой ингредиент был передан
+        if is_bun:
+            # Если была добавлена только булочка (в бургере 2 булочки, автоматически счётчик должен увеличиваться на 2)
+            return new_value == old_value + 2
+        else:
+            # Если добавлен только ингредиент
+            return new_value == old_value + 1
 
     @allure.step('Проверка закрытия окна с деталями ингредиентов')
     def is_ingredients_details_popup_closes(self):
